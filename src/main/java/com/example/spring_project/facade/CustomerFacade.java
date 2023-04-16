@@ -69,6 +69,13 @@ public class CustomerFacade extends ClientFacade{
     public Customer getCustomerDetails() throws ExceptionCoupons {
        return customerRepo.findById(customerId).orElseThrow(()->new ExceptionCoupons("The customer not exist"));
     }
+
+    /**
+     *
+     * @param category
+     * @return
+     * @throws ExceptionCoupons
+     */
     public Set<Coupon> getCustomerCouponsByCategory(Category category) throws ExceptionCoupons {
         Set<Coupon> couponList = getCustomerCoupons();
         couponList.removeIf(cou -> !cou.getCategory().equals(category));
