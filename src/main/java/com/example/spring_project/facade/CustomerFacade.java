@@ -8,12 +8,9 @@ import com.example.spring_project.repository.CompanyRepository;
 import com.example.spring_project.repository.CouponRepository;
 import com.example.spring_project.repository.CustomerRepository;
 import org.springframework.context.annotation.Scope;
-import org.springframework.expression.ExpressionException;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 

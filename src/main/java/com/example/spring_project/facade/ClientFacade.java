@@ -3,7 +3,7 @@ package com.example.spring_project.facade;
 import com.example.spring_project.repository.CompanyRepository;
 import com.example.spring_project.repository.CouponRepository;
 import com.example.spring_project.repository.CustomerRepository;
-import org.springframework.stereotype.Service;
+
 
 
 public abstract class ClientFacade {

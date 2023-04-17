@@ -10,9 +10,6 @@ import com.example.spring_project.repository.CouponRepository;
 import com.example.spring_project.repository.CustomerRepository;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Set;
 
