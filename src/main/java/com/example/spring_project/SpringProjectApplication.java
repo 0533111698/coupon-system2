@@ -21,22 +21,11 @@ import java.sql.Date;
 
 @SpringBootApplication
 public class SpringProjectApplication {
-
-	public static void main(String[] args) throws ExceptionCoupons {
+	public static void main(String[] args) {
 		ConfigurableApplicationContext ctx=SpringApplication.run(SpringProjectApplication.class, args);
-		//try {
 		TestAll testAll=ctx.getBean(TestAll.class);
 		testAll.testAll();
-		//} catch (ExceptionCoupons e) {
-		//	System.out.println(e.getMessage());
-		//}
-		//private void login() {
-		//        try {
-		//            adminFacade= (AdminFacade) LoginManager.getInstance().login("admin@admin.com","admin", ClientType.Administrator);
-		//        } catch (MyException | SQLException e) {
-		//            System.out.println(e.getMessage());
-		//        }
-		//    }
+
 
 	}
 
