@@ -86,13 +86,6 @@ public class AdminFacade extends ClientFacade{
         throw new ExceptionCoupons("The company doesn't exist");
     }
 
-    public void deleteCouponPurchase(int customerId, int couponId) throws ExceptionCoupons {
-        Customer customer = getOneCustomer(customerId);
-            Set<Coupon> coupons= customer.getCoupons();
-            coupons.removeIf(coup ->coup.getId()==couponId );
-            customer.setCoupons(coupons);
-            customerRepo.save(customer);
-    }
 
     /**
      * The method returns all companies from the db

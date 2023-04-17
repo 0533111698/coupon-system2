@@ -33,7 +33,7 @@ public class TestCustomer {
            // deletePurchaseCoupon();
 //           getCustomerCouponsByCategory();
 //          getCustomerCouponsByMaxPrice();
-//        getAllCoupons();
+        //getAllCoupons();
      // getCustomerDetails();
         }
 

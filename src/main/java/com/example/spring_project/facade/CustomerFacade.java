@@ -125,7 +125,7 @@ public class CustomerFacade extends ClientFacade{
         couponList.removeIf(cou -> cou.getPrice()>(maxPrice));
         return couponList;
     }
-    public List<Coupon>getAllCoupons(){
+    public List<Coupon> getAllCoupons(){
         return couponRepo.findAll();
     }
 

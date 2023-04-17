@@ -19,13 +19,14 @@ public class TestAll {
         TestCompany testCompany=ctx.getBean(TestCompany.class);
         TestCustomer testCustomer=ctx.getBean(TestCustomer.class);
         try {
-            CouponExpirationDailyJob job = new CouponExpirationDailyJob();
-            job.start();
+            CouponExpirationDailyJob job = ctx.getBean(CouponExpirationDailyJob.class);
+            Thread t1 = new Thread(job);
+            t1.start();
        //  testAdmin.runAllAdminFacadeTest();
         //  testCompany.runAllCompanyFacadeTest();
           testCustomer.runAllCustomerFacadeTest();
-          job.setQuit(true);
           job.stop();
+          t1.interrupt();
         } catch (ExceptionCoupons e) {
             System.out.println(e.getMessage());
         }

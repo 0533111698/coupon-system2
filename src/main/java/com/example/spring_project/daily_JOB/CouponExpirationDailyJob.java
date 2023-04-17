@@ -2,18 +2,22 @@ package com.example.spring_project.daily_JOB;
 
 import com.example.spring_project.beans.Coupon;
 import com.example.spring_project.beans.Customer;
-import com.example.spring_project.exception.ExceptionCoupons;
 import com.example.spring_project.repository.CouponRepository;
 import com.example.spring_project.repository.CustomerRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+
 @Service
 public class CouponExpirationDailyJob implements Runnable {
+    @Autowired
     private CouponRepository couponRepo;
+    @Autowired
     private CustomerRepository customerRepo;
     private boolean quit;
     private Thread thread = new Thread(this, "dailyJob");
@@ -79,7 +83,7 @@ public class CouponExpirationDailyJob implements Runnable {
                     List<Customer> customers = customerRepo.findAll();
                     for (Customer cus : customers) {
                         Set<Coupon> cusCoupons = cus.getCoupons();
-                        coupons.removeIf(coup -> coup.getId() == coupon.getId());
+                        cusCoupons.removeIf(coup -> coup.getId() == coupon.getId());
                         cus.setCoupons(cusCoupons);
                         customerRepo.save(cus);
                     }
