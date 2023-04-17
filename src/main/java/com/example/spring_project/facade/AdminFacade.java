@@ -35,7 +35,6 @@ public class AdminFacade extends ClientFacade{
     @Override
     public boolean login(String email, String password){
         return email.equals("admin@admin.com")&password.equals("admin");
-
     }
 
     /**
@@ -125,7 +124,11 @@ public class AdminFacade extends ClientFacade{
     }
     public void deleteCustomer(int customerId) throws ExceptionCoupons {
         if (customerRepo.existsById(customerId)) {
-            couponRepo.deleteCouponPurchaseByCustomerId(customerId);
+            Customer customer = getOneCustomer(customerId);
+            Set<Coupon> coupons = customer.getCoupons();
+            coupons.clear();
+            customer.setCoupons(coupons);
+            customerRepo.save(customer);
             customerRepo.deleteById(customerId);
             return;
         }

@@ -50,13 +50,13 @@ public class TestCustomer {
 
     private void getCustomerCouponsByMaxPrice() throws ExceptionCoupons {
         System.out.println("📢get customer coupons by maximum price");
-            System.out.println(customerFacade.getCustomerCouponsByMaxPrice(10.9));
+            System.out.println(customerFacade.getCustomerCoupons(10.9));
 
     }
 
     private void getCustomerCouponsByCategory() throws ExceptionCoupons {
         System.out.println("📢get customer coupons by category📢");
-            System.out.println(customerFacade.getCustomerCouponsByCategory(Category.Food));
+            System.out.println(customerFacade.getCustomerCoupons(Category.Food));
     }
 
     private void getCustomerCoupons() throws ExceptionCoupons {
