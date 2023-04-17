@@ -50,13 +50,13 @@ public class TestCustomer {
 
     private void getCustomerCouponsByMaxPrice() throws ExceptionCoupons {
         System.out.println("📢get customer coupons by maximum price");
-            System.out.println(customerFacade.getCustomerCouponsByMaxPrice(10.9));
+            System.out.println(customerFacade.getCustomerCoupons(10.9));
 
     }
 
     private void getCustomerCouponsByCategory() throws ExceptionCoupons {
         System.out.println("📢get customer coupons by category📢");
-            System.out.println(customerFacade.getCustomerCouponsByCategory(Category.Food));
+            System.out.println(customerFacade.getCustomerCoupons(Category.Food));
     }
 
     private void getCustomerCoupons() throws ExceptionCoupons {
@@ -65,11 +65,12 @@ public class TestCustomer {
 
     }
 
-//    public void deletePurchaseCoupon() {
-//        System.out.println("📢delete purchase coupon📢");
-//            customerFacade.deletePurchaseCoupon(couponsDao.getOneCoupon(42));
-//            System.out.println("delete purchase success");
-//    }
+    public void deletePurchaseCoupon() throws ExceptionCoupons {
+        System.out.println("📢delete purchase coupon📢");
+        List<Coupon> coupons = customerFacade.getAllCoupons();
+            customerFacade.deletePurchaseCoupon(coupons.get(0));
+            System.out.println("delete purchase success");
+    }
 
     private void purchaseCoupon() throws ExceptionCoupons {
         System.out.println("📢purchase coupon📢");

@@ -64,18 +64,8 @@ public class Company {
         return password;
     }
 
-    public void setPassword(String password) throws ExceptionCoupons {
-        if (password.matches(".*\\d.*")) {
-            if (password.matches("[a-z]+")){
-                if (password.matches("[A-Z]+")) {
-                    this.password = password;
-                }
-                else
-                    throw new ExceptionCoupons("Password must contains an english capital letter");
-            }
-            else throw new ExceptionCoupons("Password must contains an english letters");
-        }
-        else throw new ExceptionCoupons("Password must contains a digit");
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public List<Coupon> getCoupons() {

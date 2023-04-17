@@ -19,13 +19,4 @@ public interface CouponRepository extends JpaRepository<Coupon,Integer> {
     boolean existsByTitleAndCompanyId(String title,int companyId);
     void deleteByCompanyId(int companyId) throws ExceptionCoupons;
 
-    @Modifying
-    @Query(value = "DELETE FROM `couponsproject`.`customers_coupons` WHERE (`customer_id` = ?) and (`coupons_id` = ?)",nativeQuery = true)
-    void deleteCouponPurchase(int customerId, int couponId) throws ExceptionCoupons;
-    @Modifying
-    @Query(value = "DELETE FROM `couponsproject`.`customers_coupons` WHERE (`coupons_id` = ?)",nativeQuery = true)
-    void deleteCouponPurchaseByCouponId(int couponId) throws ExceptionCoupons;
-    @Modifying
-    @Query(value = "DELETE FROM `couponsproject`.`customers_coupons` WHERE (`customer_id` = ?)",nativeQuery = true)
-    void deleteCouponPurchaseByCustomerId(int customerId) throws ExceptionCoupons;
 }
