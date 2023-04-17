@@ -82,8 +82,8 @@ public class CustomerFacade extends ClientFacade{
     public void deletePurchaseCoupon(Coupon coupon) throws ExceptionCoupons {
         if (isPurchaseExists(coupon.getId())){
             Customer customerToUpdate = getCustomerDetails();
-            Set<Coupon>coupons=customerToUpdate.getCoupons();
-            coupons.remove(coupon);
+            Set<Coupon> coupons = customerToUpdate.getCoupons();
+            coupons.removeIf(coupon1 -> coupon1.getId() == coupon.getId());
             customerToUpdate.setCoupons(coupons);
             customerRepo.save(customerToUpdate);
             coupon.setAmount(coupon.getAmount()+1);

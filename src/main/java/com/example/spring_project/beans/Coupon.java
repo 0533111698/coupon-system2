@@ -113,7 +113,7 @@ public class Coupon {
     public void setEndDate(Date endDate) throws ExceptionCoupons {
         long millis = System.currentTimeMillis();
         java.sql.Date date = new Date(millis);
-        if (endDate.before(date)||endDate.before(getStartDate()))
+        if (endDate.before(date) && endDate.before(getStartDate()))
             throw new ExceptionCoupons("Invalid date");
         else
             this.endDate = endDate;

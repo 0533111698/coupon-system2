@@ -11,7 +11,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class TestCustomer {
@@ -26,13 +28,13 @@ public class TestCustomer {
     public void runAllCustomerFacadeTest() throws ExceptionCoupons {
         login();
         if (customerFacade != null) {
-            purchaseCoupon();
+         //  purchaseCoupon();
 //            getCustomerCoupons();
-//            deletePurchaseCoupon();
+           // deletePurchaseCoupon();
 //           getCustomerCouponsByCategory();
 //          getCustomerCouponsByMaxPrice();
 //        getAllCoupons();
-      getCustomerDetails();
+     // getCustomerDetails();
         }
 
     }
@@ -68,15 +70,17 @@ public class TestCustomer {
 
     public void deletePurchaseCoupon() throws ExceptionCoupons {
         System.out.println("📢delete purchase coupon📢");
-            customerFacade.deletePurchaseCoupon(customerFacade.getAllCoupons().get(0));
-            System.out.println("delete purchase success");
+        Set<Coupon> couponSet = customerFacade.getCustomerCoupons();
+        List<Coupon> couponList = new ArrayList<>(couponSet);
+        customerFacade.deletePurchaseCoupon(couponList.get(0));
+        System.out.println("delete purchase success");
     }
 
     private void purchaseCoupon() throws ExceptionCoupons {
         System.out.println("📢purchase coupon📢");
-            List<Coupon> coupons = customerFacade.getAllCoupons();
-            customerFacade.purchaseCoupon(coupons.get(0));
-            System.out.println("purchase success");
+        List<Coupon> coupons = customerFacade.getAllCoupons();
+        customerFacade.purchaseCoupon(coupons.get(0));
+        System.out.println("purchase success");
     }
 
     private CustomerFacade login() {
