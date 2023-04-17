@@ -18,8 +18,8 @@ public class TestAll {
         TestCompany testCompany=ctx.getBean(TestCompany.class);
         TestCustomer testCustomer=ctx.getBean(TestCustomer.class);
         try {
-//            testAdmin.runAllAdminFacadeTest();
-//            testCompany.runAllCompanyFacadeTest();
+           testAdmin.runAllAdminFacadeTest();
+           testCompany.runAllCompanyFacadeTest();
             testCustomer.runAllCustomerFacadeTest();
         } catch (ExceptionCoupons e) {
             System.out.println(e.getMessage());

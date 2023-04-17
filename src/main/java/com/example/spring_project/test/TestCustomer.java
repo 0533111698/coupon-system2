@@ -26,7 +26,7 @@ public class TestCustomer {
     public void runAllCustomerFacadeTest() throws ExceptionCoupons {
         login();
         if (customerFacade != null) {
-//            purchaseCoupon();
+            purchaseCoupon();
 //            getCustomerCoupons();
 //            deletePurchaseCoupon();
 //           getCustomerCouponsByCategory();
@@ -68,8 +68,7 @@ public class TestCustomer {
 
     public void deletePurchaseCoupon() throws ExceptionCoupons {
         System.out.println("📢delete purchase coupon📢");
-        List<Coupon> coupons = customerFacade.getAllCoupons();
-            customerFacade.deletePurchaseCoupon(coupons.get(0));
+            customerFacade.deletePurchaseCoupon(customerFacade.getAllCoupons().get(0));
             System.out.println("delete purchase success");
     }
 
