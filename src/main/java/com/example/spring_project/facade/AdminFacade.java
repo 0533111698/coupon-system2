@@ -78,7 +78,6 @@ public class AdminFacade extends ClientFacade{
             for (Customer cus : customers) {
                 Set<Coupon> coupons= cus.getCoupons();
                 coupons.removeIf(coup ->coup.getCompany().getId()==companyId );
-                //cus.setCoupons(coupons);
                 customerRepo.save(cus);
             }
             couponRepo.deleteByCompanyId(companyId);
