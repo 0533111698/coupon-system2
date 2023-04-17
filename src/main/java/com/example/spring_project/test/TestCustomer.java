@@ -26,12 +26,13 @@ public class TestCustomer {
     public void runAllCustomerFacadeTest() throws ExceptionCoupons {
         login();
         if (customerFacade != null) {
-            purchaseCoupon();
+//            purchaseCoupon();
 //            getCustomerCoupons();
+//            deletePurchaseCoupon();
 //           getCustomerCouponsByCategory();
 //          getCustomerCouponsByMaxPrice();
 //        getAllCoupons();
-//      getCustomerDetails();
+      getCustomerDetails();
         }
 
     }

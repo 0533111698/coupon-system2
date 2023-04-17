@@ -16,9 +16,11 @@ public class TestAll {
     public void testAll(){
         TestAdmin testAdmin=ctx.getBean(TestAdmin.class);
         TestCompany testCompany=ctx.getBean(TestCompany.class);
+        TestCustomer testCustomer=ctx.getBean(TestCustomer.class);
         try {
 //            testAdmin.runAllAdminFacadeTest();
-            testCompany.runAllCompanyFacadeTest();
+//            testCompany.runAllCompanyFacadeTest();
+            testCustomer.runAllCustomerFacadeTest();
         } catch (ExceptionCoupons e) {
             System.out.println(e.getMessage());
         }
