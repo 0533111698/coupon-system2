@@ -34,7 +34,7 @@ public class CompanyFacade extends ClientFacade{
     @Override
     public boolean login(String email, String password) {
         if (companyRepo.existsByEmailAndPassword(email,password)){
-            companyId=companyRepo.findByEmailAndPassword(email,password).getId();
+            companyId = companyRepo.findByEmailAndPassword(email,password).getId();
             return true;
         }
         return false;
