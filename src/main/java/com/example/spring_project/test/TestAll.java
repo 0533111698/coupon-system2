@@ -22,9 +22,9 @@ public class TestAll {
             CouponExpirationDailyJob job = ctx.getBean(CouponExpirationDailyJob.class);
             Thread t1 = new Thread(job);
             t1.start();
-       //  testAdmin.runAllAdminFacadeTest();
+            //  testAdmin.runAllAdminFacadeTest();
         //  testCompany.runAllCompanyFacadeTest();
-          testCustomer.runAllCustomerFacadeTest();
+             testCustomer.runAllCustomerFacadeTest();
           job.stop();
           t1.interrupt();
         } catch (ExceptionCoupons e) {

@@ -93,40 +93,71 @@ public class CustomerFacade extends ClientFacade{
         }
     }
 
-    public Set<Coupon>getCustomerCoupons() throws ExceptionCoupons {
-      return getCustomerDetails().getCoupons();
-    }
-
-    private boolean isPurchaseExists(int id) throws ExceptionCoupons {
-        Set<Coupon> coupons=getCustomerDetails().getCoupons();
-        for (Coupon coupon:coupons){
-            if (coupon.getId()==id)
-                return true;
-        }
-        return false;
-    }
-    public Customer getCustomerDetails() throws ExceptionCoupons {
-       return customerRepo.findById(customerId).orElseThrow(()->new ExceptionCoupons("The customer not exist"));
+    /**
+     * The method returns all the coupons from the db of the customer that performed the login
+     * @return a list of coupons object of this customer`
+     * @throws ExceptionCoupons if the customer not exists
+     */
+    public Set<Coupon> getCustomerCoupons() throws ExceptionCoupons {
+      return customerRepo.findById(customerId).orElseThrow(()->new ExceptionCoupons("The customer not exist")).getCoupons();
     }
 
     /**
-     *
-     * @param category
-     * @return
-     * @throws ExceptionCoupons
+     * The method receives category of coupon and returns a list of coupons object from this category
+     * of the customer that performed the login
+     * @param category coupon's category
+     * @return coupons object from this category of this customer
+     * @throws ExceptionCoupons if the customer not exists
      */
     public Set<Coupon> getCustomerCoupons(Category category) throws ExceptionCoupons {
         Set<Coupon> couponList = getCustomerCoupons();
         couponList.removeIf(cou -> !cou.getCategory().equals(category));
         return couponList;
     }
+
+    /**
+     *The method receives  maximum price of coupons and returns a list of coupons object up to the maximum price
+     *  of the customer that performed the login
+     * @param maxPrice maximum price of coupons
+     * @return a list of coupons object up to the maximum price  of this customer
+     * @throws ExceptionCoupons if the customer not exists
+     */
     public Set<Coupon> getCustomerCoupons(double maxPrice) throws ExceptionCoupons {
         Set<Coupon> couponList = getCustomerCoupons();
         couponList.removeIf(cou -> cou.getPrice()>(maxPrice));
         return couponList;
     }
+
+    /**
+     *The method returns the details of the customer that performed the login
+     * @return the details of the customer that performed the login
+     * @throws ExceptionCoupons if the customer not exists
+     */
+    public Customer getCustomerDetails() throws ExceptionCoupons {
+        return customerRepo.findById(customerId).orElseThrow(()->new ExceptionCoupons("The customer not exist"));
+    }
+
+    /**
+     *The method return all the coupons in the DB
+     * @return List of all coupons in DB
+     */
     public List<Coupon> getAllCoupons(){
         return couponRepo.findAll();
+    }
+
+    /**
+     * The method checks if the purchase  exists in the db by customer id and coupon id
+     * @param couponId coupon id
+     * @return true or false
+     * @throws ExceptionCoupons if the customer not exists
+     */
+    private boolean isPurchaseExists(int couponId) throws ExceptionCoupons {
+        Set<Coupon> coupons = customerRepo.findById(customerId).orElseThrow(()->new ExceptionCoupons("The customer not exist")).getCoupons();
+        for (Coupon coupon:coupons){
+            if (coupon.getId() == couponId)
+                return true;
+        }
+        return false;
     }
 
 

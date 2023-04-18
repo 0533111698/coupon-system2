@@ -124,9 +124,9 @@ public class Coupon {
     }
 
     public void setAmount(int amount) throws ExceptionCoupons {
-        if (amount>=1)
+        if (amount>=0)
             this.amount = amount;
-        else throw new ExceptionCoupons("Amount must be above one");
+        else throw new ExceptionCoupons("Amount must be above zero");
     }
 
     public double getPrice() {

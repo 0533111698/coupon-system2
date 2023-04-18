@@ -20,6 +20,14 @@ public class LoginManager {
         this.ctx = ctx;
     }
 
+    /**
+     * The method receives client's email and password and type and checks if the email and password are correct,
+     * by method 'facade.login' from the facades
+     * @param email client's email
+     * @param password client's password
+     * @param clientType client's type
+     * @return ClientFacade
+     */
     public ClientFacade login(String email, String password, ClientType clientType) {
         switch (clientType){
             case Administrator:

@@ -11,7 +11,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
-import java.sql.SQLException;
 import java.util.List;
 @Service
 
@@ -29,7 +28,7 @@ public class TestCompany {
            addCoupon();
 //            updateCoupon();
 //            deleteCoupon();
-//            getCompanyCoupons();
+//           getCompanyCoupons();
 //            getCompanyCouponsByCategory();
 //            getCompanyCouponsByMaxPrice();
 //            getCompanyDetails();
@@ -45,23 +44,23 @@ public class TestCompany {
 
     private void getCompanyCouponsByMaxPrice() {
         System.out.println("📢get company coupons by maximum price📢");
-        System.out.println(companyFacade.getAllCouponsByCompanyIdAndMaxPrice(7.9));
+        System.out.println(companyFacade.getCompanyCoupons(10.9));
 
     }
 
     private void getCompanyCouponsByCategory() {
         System.out.println("📢get company coupons by category📢");
-        System.out.println(companyFacade.getAllCouponsByCompanyIdAndCategory(Category.Food));
+        System.out.println(companyFacade.getCompanyCoupons(Category.SPORT));
     }
 
     private void getCompanyCoupons() {
         System.out.println("📢get company coupons📢");
-        System.out.println(companyFacade.getAllCouponsByCompanyId());
+        System.out.println(companyFacade.getCompanyCoupons());
     }
 
     private void deleteCoupon() throws ExceptionCoupons {
         System.out.println("📢delete coupon📢");
-        List<Coupon> coupons = companyFacade.getAllCouponsByCompanyId();
+        List<Coupon> coupons = companyFacade.getCompanyCoupons();
         companyFacade.deleteCouponById(coupons.get(0).getId());
         System.out.println("delete coupon success");
 
@@ -71,8 +70,8 @@ public class TestCompany {
 
     private void updateCoupon() throws ExceptionCoupons {
         System.out.println("📢update coupon📢");
-        List<Coupon> coupons = companyFacade.getAllCouponsByCompanyId();
-        Coupon coupon1 = coupons.get(3);
+        List<Coupon> coupons = companyFacade.getCompanyCoupons();
+        Coupon coupon1 = coupons.get(0);
         coupon1.setDescription("Margareta as smart as 'menta'");
         companyFacade.updateCoupon(coupon1);
         System.out.println("update coupon success");
@@ -104,6 +103,6 @@ public class TestCompany {
 
     private CompanyFacade login(){
         LoginManager loginManager=ctx.getBean(LoginManager.class);
-        return companyFacade= (CompanyFacade) loginManager.login("Nirteck@gmail.com", "Nirteck1234", ClientType.Company);
+        return companyFacade = (CompanyFacade) loginManager.login("Nirteck@gmail.com", "Nirteck1234", ClientType.Company);
     }
 }

@@ -57,10 +57,11 @@ public class AdminFacade extends ClientFacade{
      * @throws ExceptionCoupons if the company not found by id, or if the name is different from the db
      */
     public void updateCompany(Company company) throws ExceptionCoupons{
-        Company companyToCheck= getOneCompany(company.getId());
-        if (companyToCheck.getName().equals(company.getName()))
+        Company companyToCheck = getOneCompany(company.getId());
+        if (!companyToCheck.getName().equals(company.getName())) {
             throw new ExceptionCoupons("The company name cannot be updated");
-        companyRepo.save(companyToCheck);
+        }
+        companyRepo.save(company);
 
     }
 
@@ -105,16 +106,40 @@ public class AdminFacade extends ClientFacade{
     public Company getOneCompany(int companyId) throws ExceptionCoupons {
         return companyRepo.findById(companyId).orElseThrow(()->new ExceptionCoupons("The company doesn't exist!"));
     }
+
+    /**
+     * The method receives a customer object and checks if the customer's email exists in the 'customers'  db,
+     * if not, the method add it to the 'customers' db by method 'addCustomer' from the dao
+     * @param customer a customer object
+     * @throws ExceptionCoupons if the email exists
+     */
     public void addCustomer(Customer customer) throws ExceptionCoupons {
         if (customerRepo.existsByEmail(customer.getEmail()))
             throw new ExceptionCoupons("This email exists");
         customerRepo.save(customer);
     }
-    public void updateCustomer(Customer customer) throws ExceptionCoupons{
-        Customer customerToCheck= getOneCustomer(customer.getId());
-        customerRepo.save(customerToCheck);
 
+    /**
+     * The method receives a customer object and checks if the customer exist in the 'customers' db by id
+     * and then updates the customer by the details it receives.
+     * @param customer a customer object
+     * @throws ExceptionCoupons if the customers' id is not exists
+     */
+    public void updateCustomer(Customer customer) throws ExceptionCoupons{
+        if (customerRepo.existsById(customer.getId())) {
+            customerRepo.save(customer);
+            return;
+        }
+        throw new ExceptionCoupons("the customer was not found");
     }
+
+    /**
+     * The method receives customer's id and checks if the customer exists in the 'customers' db
+     * and then deletes coupons purchase of customers by the method 'deleteCouponPurchasesByCustomerId' from the dao
+     * deletes the customer by the method 'deleteCustomer' from the dao
+     * @param customerId customer's id
+     * @throws ExceptionCoupons if the customer is not exists
+     */
     public void deleteCustomer(int customerId) throws ExceptionCoupons {
         if (customerRepo.existsById(customerId)) {
             Customer customer = getOneCustomer(customerId);
@@ -125,13 +150,26 @@ public class AdminFacade extends ClientFacade{
             customerRepo.deleteById(customerId);
             return;
         }
-        throw new ExceptionCoupons("The customer delete is failed");
+        throw new ExceptionCoupons("The customer is not exists");
     }
+
+    /**
+     *The method returns all the customers from the 'customers' db
+     * @return a list of customer object
+     */
     public List<Customer>getAllCustomers(){
         return customerRepo.findAll();
     }
-    public Customer getOneCustomer(int id) throws ExceptionCoupons {
-        return customerRepo.findById(id).orElseThrow(()->new ExceptionCoupons("The customer not found!"));
+
+    /**
+     *The method receives customer's id, checks if the customer exists in the 'customers' db
+     * and then returns a customer object
+     * @param customerId customer's id
+     * @return a customer object
+     * @throws ExceptionCoupons if the customer is not exists
+     */
+    public Customer getOneCustomer(int customerId) throws ExceptionCoupons {
+        return customerRepo.findById(customerId).orElseThrow(()->new ExceptionCoupons("The customer not found!"));
     }
 
 }

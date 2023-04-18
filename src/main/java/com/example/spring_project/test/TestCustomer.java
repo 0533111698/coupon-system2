@@ -28,13 +28,13 @@ public class TestCustomer {
     public void runAllCustomerFacadeTest() throws ExceptionCoupons {
         login();
         if (customerFacade != null) {
-         //  purchaseCoupon();
-//            getCustomerCoupons();
+ //          purchaseCoupon();
+ //         getCustomerCoupons();
            // deletePurchaseCoupon();
 //           getCustomerCouponsByCategory();
-//          getCustomerCouponsByMaxPrice();
+//       getCustomerCouponsByMaxPrice();
         //getAllCoupons();
-     // getCustomerDetails();
+            //getCustomerDetails();
         }
 
     }
@@ -53,7 +53,7 @@ public class TestCustomer {
 
     private void getCustomerCouponsByMaxPrice() throws ExceptionCoupons {
         System.out.println("📢get customer coupons by maximum price");
-            System.out.println(customerFacade.getCustomerCoupons(10.9));
+            System.out.println(customerFacade.getCustomerCoupons(1.9));
 
     }
 
@@ -85,7 +85,7 @@ public class TestCustomer {
 
     private CustomerFacade login() {
         LoginManager loginManager=ctx.getBean(LoginManager.class);
-        return customerFacade= (CustomerFacade) loginManager.login("malki@gmail.com", "malki1234", ClientType.Customer);
+        return customerFacade= (CustomerFacade) loginManager.login("Aviad@gmail.com", "Aviad1234", ClientType.Customer);
 
 
     }
