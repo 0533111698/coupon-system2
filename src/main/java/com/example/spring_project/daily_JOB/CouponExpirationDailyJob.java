@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -19,19 +18,12 @@ public class CouponExpirationDailyJob implements Runnable {
     private CouponRepository couponRepo;
     @Autowired
     private CustomerRepository customerRepo;
-    private boolean quit;
-    private Thread thread = new Thread(this, "dailyJob");
+    private boolean quit = false ;
 
-    public void setQuit(boolean quit) {
-        this.quit = quit;
-    }
 
     public CouponExpirationDailyJob() {
     }
 
-    public CouponExpirationDailyJob(boolean quit) {
-        this.quit = quit;
-    }
 
     /**
      * The method is Override to method 'run' and checks if this thread is not quit
@@ -45,8 +37,8 @@ public class CouponExpirationDailyJob implements Runnable {
                 Thread.sleep(1000 * 60 * 60 * 24);
             } catch (InterruptedException ignored) {
             }
-
         }
+        System.out.println("the program end");
     }
 
 
@@ -56,8 +48,6 @@ public class CouponExpirationDailyJob implements Runnable {
      */
     public void stop() {
         quit = true;
-        System.out.println("the program end");
-
     }
 
     /**
