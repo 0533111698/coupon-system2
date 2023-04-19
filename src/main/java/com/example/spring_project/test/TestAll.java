@@ -24,7 +24,7 @@ public class TestAll {
             t1.start();
             //  testAdmin.runAllAdminFacadeTest();
         //  testCompany.runAllCompanyFacadeTest();
-              testCustomer.runAllCustomerFacadeTest();
+            testCustomer.runAllCustomerFacadeTest();
             job.stop();
             t1.interrupt();
         } catch (ExceptionCoupons e) {
