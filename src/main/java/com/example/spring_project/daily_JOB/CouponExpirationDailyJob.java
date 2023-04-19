@@ -28,6 +28,7 @@ public class CouponExpirationDailyJob implements Runnable {
     /**
      * The method is Override to method 'run' and checks if this thread is not quit
      *if not, the check expired have called
+     * if yes, the method print "the program end"
      */
     @Override
     public void run() {
@@ -44,7 +45,7 @@ public class CouponExpirationDailyJob implements Runnable {
 
 
     /**
-     * the method changes the quit to true and wake up the thread to close the thread
+     * the method changes the quit to true
      */
     public void stop() {
         quit = true;
@@ -52,9 +53,8 @@ public class CouponExpirationDailyJob implements Runnable {
 
     /**
      * checks for all coupons if their dates are before today
-     * if yes the method delete the purchase of coupon from 'coupons' db
-     * by the method 'deleteCouponPurchaseByCouponId' from the dao
-     * and delete coupon from 'coupons' db by the method 'deleteCoupon' from the dao
+     * if yes the method delete the purchase of coupon from db
+     * and delete coupon from 'coupons' db
      */
     public void checkExpired() {
         try {
