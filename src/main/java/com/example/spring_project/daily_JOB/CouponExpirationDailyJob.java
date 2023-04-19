@@ -49,20 +49,13 @@ public class CouponExpirationDailyJob implements Runnable {
         }
     }
 
-    /**
-     * the method start the thread
-     */
-    public void start() {
-        this.thread.start();
-        quit = false;
-    }
+
 
     /**
      * the method changes the quit to true and wake up the thread to close the thread
      */
     public void stop() {
         quit = true;
-        thread.interrupt();
         System.out.println("the program end");
 
     }
