@@ -55,7 +55,7 @@ public class CustomerFacade extends ClientFacade{
         long millis = System.currentTimeMillis();
         java.sql.Date date = new Date(millis);
         if (!isPurchaseExists(coupon.getId())){
-            if (coupon.getId()>0){
+            if (coupon.getAmount()>0){
                 if (coupon.getEndDate().after(date)){
                     Customer customerToUpdate=getCustomerDetails();
                     Set<Coupon>coupons=customerToUpdate.getCoupons();
