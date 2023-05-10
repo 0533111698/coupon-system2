@@ -1,16 +1,20 @@
 package com.example.spring_project.beans;
 
 import com.example.spring_project.exception.ExceptionCoupons;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.List;
 @Entity
 @Table(name = "companies")
+@ToString
 public class Company {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name, email, password;
+    @JsonIgnore
     @OneToMany(mappedBy = "company",fetch = FetchType.EAGER)
     private List<Coupon> coupons;
 

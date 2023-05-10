@@ -1,6 +1,7 @@
 package com.example.spring_project.beans;
 
 import com.example.spring_project.exception.ExceptionCoupons;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -12,7 +13,6 @@ import org.hibernate.sql.Delete;
 
 @Entity
 @Table(name = "coupons")
-@Data
 @ToString
 public class Coupon {
     @Id
@@ -27,6 +27,7 @@ public class Coupon {
     private int amount;
     private double price;
     private String image;
+    @JsonIgnore
     @ManyToMany(mappedBy = "coupons",fetch = FetchType.EAGER)
     private Set<Customer> customers;
 

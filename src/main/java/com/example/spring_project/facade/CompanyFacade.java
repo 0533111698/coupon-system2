@@ -5,9 +5,12 @@ import com.example.spring_project.beans.Company;
 import com.example.spring_project.beans.Coupon;
 import com.example.spring_project.beans.Customer;
 import com.example.spring_project.exception.ExceptionCoupons;
+//import com.example.spring_project.filter.TokenFilter;
+//import com.example.spring_project.login.LoginHashMap;
 import com.example.spring_project.repository.CompanyRepository;
 import com.example.spring_project.repository.CouponRepository;
 import com.example.spring_project.repository.CustomerRepository;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -17,6 +20,7 @@ import java.util.Set;
 @Scope("prototype")
 public class CompanyFacade extends ClientFacade{
     private int companyId;
+
     public CompanyFacade(CustomerRepository customerRepository, CouponRepository couponRepository, CompanyRepository companyRepository) {
         super(customerRepository, couponRepository, companyRepository);
     }

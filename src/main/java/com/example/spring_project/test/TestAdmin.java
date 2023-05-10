@@ -32,8 +32,8 @@ public class TestAdmin {
 //            getOneCompany();
 //           addCustomer();
 //            updateCustomer();
-            deleteCustomer();
-//            getAllCustomers();
+//            deleteCustomer();
+            getAllCustomers();
 //            getOneCustomer();
 
         }

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -18,8 +19,11 @@ public class CouponExpirationDailyJob implements Runnable {
     private CouponRepository couponRepo;
     @Autowired
     private CustomerRepository customerRepo;
-    private boolean quit = false ;
+    private boolean quit;
 
+    public void setQuit(boolean quit) {
+        this.quit = quit;
+    }
 
     public CouponExpirationDailyJob() {
     }
@@ -28,7 +32,6 @@ public class CouponExpirationDailyJob implements Runnable {
     /**
      * The method is Override to method 'run' and checks if this thread is not quit
      *if not, the check expired have called
-     * if yes, the method print "the program end"
      */
     @Override
     public void run() {
@@ -38,23 +41,25 @@ public class CouponExpirationDailyJob implements Runnable {
                 Thread.sleep(1000 * 60 * 60 * 24);
             } catch (InterruptedException ignored) {
             }
+
         }
-        System.out.println("the program end");
     }
 
 
 
     /**
-     * the method changes the quit to true
+     * the method changes the quit to true and wake up the thread to close the thread
      */
     public void stop() {
         quit = true;
+
     }
 
     /**
      * checks for all coupons if their dates are before today
-     * if yes the method delete the purchase of coupon from db
-     * and delete coupon from 'coupons' db
+     * if yes the method delete the purchase of coupon from 'coupons' db
+     * by the method 'deleteCouponPurchaseByCouponId' from the dao
+     * and delete coupon from 'coupons' db by the method 'deleteCoupon' from the dao
      */
     public void checkExpired() {
         try {
@@ -71,7 +76,6 @@ public class CouponExpirationDailyJob implements Runnable {
                         customerRepo.save(cus);
                     }
                    couponRepo.deleteById(coupon.getId());
-                   System.out.println("delete success");
                 }
             }
         } catch (Exception e) {

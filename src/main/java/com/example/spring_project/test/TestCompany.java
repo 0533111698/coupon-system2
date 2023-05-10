@@ -97,7 +97,6 @@ public class TestCompany {
         companyFacade.addCoupon(coupon3);
         companyFacade.addCoupon(coupon4);
         companyFacade.addCoupon(coupon5);
-        System.out.println("add coupon success");
 
     }
 

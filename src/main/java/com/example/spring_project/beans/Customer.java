@@ -1,10 +1,14 @@
 package com.example.spring_project.beans;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.ToString;
+
 import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
 @Entity
 @Table(name = "customers")
+@ToString
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,6 +17,7 @@ public class Customer {
     private String lastName;
     private String email;
     private String password;
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Coupon> coupons;
 
