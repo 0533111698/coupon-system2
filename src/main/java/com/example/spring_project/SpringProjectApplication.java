@@ -36,10 +36,10 @@ public class SpringProjectApplication {
 				.paths(Predicate.not(PathSelectors.regex("/error.*")))
 				.build();
 	}
-//	@Bean
-//	public HashMap <String, LoginParameters> sessions(){
-//		return new HashMap ();
-//	}
+	@Bean
+	public HashMap <String, LoginParameters> sessions(){
+		return new HashMap ();
+	}
 
 
 }
