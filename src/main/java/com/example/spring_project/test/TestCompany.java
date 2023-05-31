@@ -25,10 +25,10 @@ public class TestCompany {
     public void runAllCompanyFacadeTest() throws ExceptionCoupons {
         login();
         if (companyFacade != null) {
-           addCoupon();
+//           addCoupon();
 //            updateCoupon();
 //            deleteCoupon();
-//           getCompanyCoupons();
+           getCompanyCoupons();
 //            getCompanyCouponsByCategory();
 //            getCompanyCouponsByMaxPrice();
 //            getCompanyDetails();
@@ -82,15 +82,15 @@ public class TestCompany {
     private void addCoupon() throws ExceptionCoupons {
         System.out.println("📢add coupon📢");
 
-        Coupon coupon1 = new Coupon(companyFacade.getCompanyDetails(), Category.Food, "Margareta", "Big bos to sail",
+        Coupon coupon1 = new Coupon(Category.FOOD, "Margareta", "Big bos to sail",
                 Date.valueOf("2023-02-08"), Date.valueOf("2023-09-02"), 2, 1.90, "🤬");
-        Coupon coupon2 = new Coupon(companyFacade.getCompanyDetails(), Category.SPA, "Shraga", "Shraga is recruiting John Bryce graduates ",
+        Coupon coupon2 = new Coupon(Category.SPA, "Shraga", "Shraga is recruiting John Bryce graduates ",
                     Date.valueOf("2023-02-08"), Date.valueOf("2023-07-02"), 7, 8.90, "🤠");
-        Coupon coupon3 = new Coupon(companyFacade.getCompanyDetails(), Category.SPORT, "Stam", "Achla shem shebaholam",
+        Coupon coupon3 = new Coupon( Category.SPORT, "Stam", "Achla shem shebaholam",
                     Date.valueOf("2023-02-08"), Date.valueOf("2023-06-02"), 8, 9.90, "😎");
-        Coupon coupon4 = new Coupon(companyFacade.getCompanyDetails(), Category.BEVERAGES, "Yada", "yada yada",
+        Coupon coupon4 = new Coupon( Category.BEVERAGES, "Yada", "yada yada",
                     Date.valueOf("2023-02-08"), Date.valueOf("2023-05-02"), 2, 10.90, "😴");
-        Coupon coupon5 = new Coupon(companyFacade.getCompanyDetails(), Category.TRAVEL, "Bla", "bla bla",
+        Coupon coupon5 = new Coupon( Category.TRAVEL, "Bla", "bla bla",
                     Date.valueOf("2023-02-07"), Date.valueOf("2023-02-18"), 4, 6.90, "👽");
         companyFacade.addCoupon(coupon1);
         companyFacade.addCoupon(coupon2);

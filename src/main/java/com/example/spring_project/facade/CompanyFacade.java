@@ -5,14 +5,13 @@ import com.example.spring_project.beans.Company;
 import com.example.spring_project.beans.Coupon;
 import com.example.spring_project.beans.Customer;
 import com.example.spring_project.exception.ExceptionCoupons;
-//import com.example.spring_project.filter.TokenFilter;
-//import com.example.spring_project.login.LoginHashMap;
 import com.example.spring_project.repository.CompanyRepository;
 import com.example.spring_project.repository.CouponRepository;
 import com.example.spring_project.repository.CustomerRepository;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
+
+import java.sql.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -24,7 +23,6 @@ public class CompanyFacade extends ClientFacade{
     public CompanyFacade(CustomerRepository customerRepository, CouponRepository couponRepository, CompanyRepository companyRepository) {
         super(customerRepository, couponRepository, companyRepository);
     }
-
     /**
      * The method receives company's email and password and checks if the email and password are correct,
      * by method 'isCompanyExists' from the dao
@@ -40,18 +38,31 @@ public class CompanyFacade extends ClientFacade{
         }
         return false;
     }
-
     /**
      * The method receives a coupon object and checks if this company has the same title to another coupon,
      * if not, the method adds it to 'coupons' db by the method 'addCoupon' from the dao
      * @param coupon a coupon object
      * @throws ExceptionCoupons
      */
-    public void addCoupon(Coupon coupon) throws ExceptionCoupons {
+    public void addCoupon(Coupon coupon) throws ExceptionCoupons  {
+        coupon.setCompany(getCompanyDetails());
         if (couponRepo.existsByTitleAndCompanyId(coupon.getTitle(),coupon.getCompany().getId())) {
-            throw new ExceptionCoupons("This title is exists for your company");
+            throw new ExceptionCoupons("This title  exists for your company");
+        }
+        if (!checkEndDate(coupon.getEndDate(),coupon.getStartDate())){
+            throw new ExceptionCoupons("Invalid end date");
         }
         couponRepo.save(coupon);
+    }
+    private boolean checkEndDate(Date endDate, Date startDate){
+        long millis = System.currentTimeMillis();
+        Date date = new Date(millis);
+        if (endDate.before(date) || endDate.before(startDate)) {
+            return false;
+        }
+        else
+            return true;
+
     }
 
     /**
@@ -61,13 +72,13 @@ public class CompanyFacade extends ClientFacade{
      * @throws ExceptionCoupons if the coupon is not exist
      */
     public void updateCoupon(Coupon coupon) throws ExceptionCoupons {
+        coupon.setCompany(getCompanyDetails());
         if (couponRepo.existsById(coupon.getId())) {
             couponRepo.save(coupon);
         }
         else
-            throw new ExceptionCoupons("coupon is not exists");
+            throw new ExceptionCoupons("coupon not exists");
     }
-
     /**
      *The method receives coupon's id and checks f the coupon is exists in the 'coupons' db
      * and then deletes the coupon purchase history by remove the coupon from the customer coupons list,
@@ -87,9 +98,8 @@ public class CompanyFacade extends ClientFacade{
             couponRepo.deleteById(couponId);
         }
         else
-            throw new ExceptionCoupons("coupon is not exists");
+            throw new ExceptionCoupons("coupon  not exists");
     }
-
     /**
      *The method returns all the coupons from the db of the company that performed the login
      * @return a list of coupons object of this company
@@ -97,7 +107,6 @@ public class CompanyFacade extends ClientFacade{
     public List<Coupon> getCompanyCoupons(){
         return couponRepo.findByCompanyId(companyId);
     }
-
     /**
      * The method receives category of coupon and returns a list of coupons object from this category
      * of the company that performed the login

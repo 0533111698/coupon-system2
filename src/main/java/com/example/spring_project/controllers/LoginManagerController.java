@@ -28,7 +28,8 @@ public class LoginManagerController {
     @Autowired
     private ApplicationContext ctx;
 
-
+    @Autowired
+    private HashMap<String, LoginParameters> sessions;
 
 
     @Autowired
@@ -38,34 +39,26 @@ public class LoginManagerController {
     @Autowired
     private CustomerRepository customerRepository;
 
-
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginReq loginReq) {
-        LoginManager loginManager=ctx.getBean(LoginManager.class);
-        SpringProjectApplication spa=ctx.getBean(SpringProjectApplication.class);
         ClientFacade clientFacade = loginManager.login(loginReq.getEmail(), loginReq.getPassword(), loginReq.getClientType());
             if (clientFacade != null) {
                 String token=createToken(loginReq);
-                    spa.sessions().put(token, new LoginParameters(token));
-                System.out.println(spa.sessions().toString());
-
-                    return ResponseEntity.ok().body(token);
+                sessions.put(token, new LoginParameters(clientFacade));
+                return ResponseEntity.ok().body(token);
             }
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("you are not register!");
-
-
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("invalid email or password!");
     }
-//    @GetMapping
-//    public ResponseEntity<?>bla(HttpServletRequest request){
-//        String token =request.getHeader("Authorization");
-//        try {
-//            String name = JWT.decode(token.replace("Bearer ", "")).getClaim("name").asString();
-//            return ResponseEntity.ok(name);
-//        }
-//        catch (Exception e) {
-//            return ResponseEntity.status(401).body("Eror, please login first");
-//        }
-//    }
+    @PostMapping("/logout/{token}")
+    public ResponseEntity<String>logout(@PathVariable String token){
+        try {
+            sessions.remove( token.replace("Bearer ",""));
+            return ResponseEntity.ok("good bye");
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND) .body("This moment you automat logged-out");
+        }
+    }
+
     private String createToken(LoginReq loginReq){
         String token=null;
         switch (loginReq.getClientType()){
@@ -74,19 +67,17 @@ public class LoginManagerController {
                         .withClaim("name","Big Boss")
                         .withClaim("clientType","Administrator")
                         .withClaim("email","admin@gmail.com")
-                        .withIssuer("ginger coupon")
+                        .withIssuer("reddish coupon")
                         .withIssuedAt(new Date())
                         .sign(Algorithm.none());
                 break;
-
             case Company:
                 Company company=companyRepository.findByEmailAndPassword(loginReq.getEmail(),loginReq.getPassword());
-
                  token = JWT.create()
                         .withClaim("name",company.getName())
                          .withClaim("clientType","Company")
                         .withClaim("email",company.getEmail())
-                        .withIssuer("ginger coupon")
+                        .withIssuer("reddish coupon")
                         .withIssuedAt(new Date())
                         .sign(Algorithm.none());
                  break;
@@ -97,12 +88,10 @@ public class LoginManagerController {
                         .withClaim("name",customer.getFirstName()+" "+customer.getLastName())
                         .withClaim("clientType","Customer")
                         .withClaim("email",customer.getEmail())
-                        .withIssuer("ginger coupon")
+                        .withIssuer("reddish coupon")
                         .withIssuedAt(new Date())
                         .sign(Algorithm.none());
                 break;
-
-
         }
         return token;
 

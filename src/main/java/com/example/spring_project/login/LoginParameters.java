@@ -1,37 +1,52 @@
 package com.example.spring_project.login;
 
-import com.auth0.jwt.JWT;
+
+import com.example.spring_project.facade.ClientFacade;
 import lombok.Data;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.util.Calendar;
-import java.util.Date;
+
 @Component
+@Scope("prototype")
 public class LoginParameters {
     private Calendar calendar;
-    private ClientType clientType;
+    private ClientFacade clientFacade;
 
-    public LoginParameters(String token) {
-        this.calendar =Calendar.getInstance();
-        this.clientType = ClientType.valueOf(JWT.decode(token).getClaim("clientType").asString());
+    public LoginParameters(ClientFacade clientFacade) {
+        this.calendar = Calendar.getInstance();
+        this.clientFacade = clientFacade;
     }
 
     public LoginParameters() {
+    }
+
+    public void setClientFacade(ClientFacade clientFacade) {
+        this.clientFacade = clientFacade;
     }
 
     public Calendar getDate() {
         return calendar;
     }
 
-    public ClientType getClientType() {
-        return clientType;
+    public void setCalendar(Calendar calendar) {
+        this.calendar = calendar;
+    }
+
+    public Calendar getCalendar() {
+        return calendar;
+    }
+
+    public ClientFacade getClientFacade() {
+        return clientFacade;
     }
 
     @Override
     public String toString() {
         return "LoginParameters{" +
-                "date=" + calendar +
-                ", clientType=" + clientType +
+                "calendar=" + calendar +
+                ", clientFacade=" + clientFacade +
                 '}';
     }
 }

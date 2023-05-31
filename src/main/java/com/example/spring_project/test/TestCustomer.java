@@ -26,13 +26,13 @@ public class TestCustomer {
     public void runAllCustomerFacadeTest() throws ExceptionCoupons {
         login();
         if (customerFacade != null) {
-            purchaseCoupon();
+//            purchaseCoupon();
 //            getCustomerCoupons();
 //            deletePurchaseCoupon();
 //           getCustomerCouponsByCategory();
 //          getCustomerCouponsByMaxPrice();
-//        getAllCoupons();
-      getCustomerDetails();
+        getAllCoupons();
+//      getCustomerDetails();
         }
 
     }
@@ -57,7 +57,7 @@ public class TestCustomer {
 
     private void getCustomerCouponsByCategory() throws ExceptionCoupons {
         System.out.println("📢get customer coupons by category📢");
-            System.out.println(customerFacade.getCustomerCoupons(Category.Food));
+            System.out.println(customerFacade.getCustomerCoupons(Category.FOOD));
     }
 
     private void getCustomerCoupons() throws ExceptionCoupons {

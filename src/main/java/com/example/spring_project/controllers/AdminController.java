@@ -12,19 +12,20 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/admin")
-@CrossOrigin(origins = "*")
+//@CrossOrigin(origins = "*")
 
 public class AdminController {
     private AdminFacade adminFacade;
+
 
     public AdminController(AdminFacade adminFacade) {
         this.adminFacade = adminFacade;
     }
     @PostMapping("/addCompany")
-    public ResponseEntity<String >addCompany(@RequestBody Company company){
+    public ResponseEntity<? >addCompany(@RequestBody Company company){
      try {
          adminFacade.addCompany(company);
-         return ResponseEntity.status(HttpStatus.CREATED).body("company added!");
+         return ResponseEntity.status(HttpStatus.CREATED).body(company);
      } catch (ExceptionCoupons e) {
          return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
      }
@@ -62,10 +63,10 @@ public class AdminController {
         }
     }
     @PostMapping("/addCustomer")
-    public ResponseEntity<String>addCustomer(@RequestBody Customer customer){
+    public ResponseEntity<?>addCustomer(@RequestBody Customer customer){
         try {
             adminFacade.addCustomer(customer);
-            return ResponseEntity.status(HttpStatus.CREATED).body("Customer added!");
+            return ResponseEntity.status(HttpStatus.CREATED).body(customer);
         } catch (ExceptionCoupons e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }

@@ -38,7 +38,7 @@ public class SpringProjectApplication {
 	}
 	@Bean
 	public HashMap <String, LoginParameters> sessions(){
-		return new HashMap ();
+		return new HashMap<String, LoginParameters> ();
 	}
 
 

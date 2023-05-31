@@ -25,15 +25,15 @@ public class TestAdmin {
     public void runAllAdminFacadeTest() throws ExceptionCoupons {
         login();
         if (adminFacade!=null){
-//               addCompany();
+               addCompany();
 //            updateCompany();
 //           deleteCompany();
 //         getAllCompanies();
 //            getOneCompany();
-//           addCustomer();
+           addCustomer();
 //            updateCustomer();
 //            deleteCustomer();
-            getAllCustomers();
+//            getAllCustomers();
 //            getOneCustomer();
 
         }

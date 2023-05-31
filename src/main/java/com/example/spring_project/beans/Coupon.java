@@ -20,12 +20,18 @@ public class Coupon {
     private int id;
     @ManyToOne()
     private Company company;
+//    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Category category;
+//    @Column(nullable = false)
     private String title, description;
+//    @Column(nullable = false)
     private Date startDate, endDate;
+//    @Column(nullable = false)
     private int amount;
+//    @Column(nullable = false)
     private double price;
+    @Column(columnDefinition = "LONGTEXT")
     private String image;
     @JsonIgnore
     @ManyToMany(mappedBy = "coupons",fetch = FetchType.EAGER)
@@ -34,17 +40,28 @@ public class Coupon {
     public Coupon() {
     }
 
-    public Coupon(Company company, Category category, String title, String description, Date startDate, Date endDate, int amount, double price, String image) throws ExceptionCoupons {
-        this.company = company;
+    public Coupon(Category category, String title, String description, Date startDate, Date endDate, int amount, double price, String image) throws ExceptionCoupons {
         this.category = category;
         this.title = title;
         this.description = description;
-        setStartDate(startDate);
-        setEndDate(endDate);
+        this.startDate=startDate;
+        this.endDate=endDate;
         setAmount(amount);
         setPrice(price);
         this.image = image;
     }
+    public Coupon(Company company,Category category, String title, String description, Date startDate, Date endDate, int amount, double price, String image) throws ExceptionCoupons {
+        this.company=company;
+        this.category = category;
+        this.title = title;
+        this.description = description;
+        setStartDate(startDate);
+        this.endDate=endDate;
+        setAmount(amount);
+        setPrice(price);
+        this.image = image;
+    }
+
 
     public Coupon(int id, Company company, Category category, String title, String description, Date startDate, Date endDate, int amount, double price, String image) throws ExceptionCoupons {
         this.id = id;
@@ -53,7 +70,7 @@ public class Coupon {
         this.title = title;
         this.description = description;
         setStartDate(startDate);
-        setEndDate(endDate);
+        this.endDate=endDate;
         setAmount(amount);
         setPrice(price);
         this.image = image;

@@ -35,14 +35,17 @@ public class LoginManager {
                 if (adminFacade.login(email,password)) {
                     return adminFacade;
                 }
+                break;
             case Company:
                 CompanyFacade companyFacade =ctx.getBean(CompanyFacade.class);
                 if (companyFacade.login(email,password))
                     return companyFacade;
+                break;
             case Customer:
                 CustomerFacade customerFacade = ctx.getBean(CustomerFacade.class);
                 if (customerFacade.login(email,password))
                     return customerFacade;
+                break;
         }
         return null;
     }

@@ -17,7 +17,7 @@ public class Customer {
     private String lastName;
     private String email;
     private String password;
-    @JsonIgnore
+
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Coupon> coupons;
 
